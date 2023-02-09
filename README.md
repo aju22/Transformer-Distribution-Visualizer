@@ -1,6 +1,6 @@
 # Transformer Distribution Visualizer
 
-A simple Flask-based web ui application that allows users to input a prompt, select a Hugging Face transformer model, and specify a decoding strategy to generate text. The generated text, along with its word probabilities and top 10 next best words, can be displayed in an interactive fashion on the web page. 
+A simple Flask-based Web-UI application that allows users to input a prompt, select a Hugging Face transformer model, and specify a decoding strategy to generate text. The generated text, along with its word probabilities and top 10 next best words, can be displayed in an interactive fashion on the web page. 
 
 ## Getting Started
 
