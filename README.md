@@ -19,13 +19,13 @@ Before you begin, make sure you have the following installed:
 1. Clone the repository:
 
 ```
-git clone https://github.com/aju22/transformer-model-web-ui.git
+git clone https://github.com/aju22/Transformer-Distribution-Visualizer.git
 ```
 
 2. Navigate to the project directory:
 
 ```
-cd transformer-model-web-ui
+cd Transformer-Distribution-Visualizer
 ```
 
 3. Create a virtual environment:
