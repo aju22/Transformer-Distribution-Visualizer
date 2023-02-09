@@ -68,21 +68,21 @@ python main.py
 ```
 
 ### Arguments
-- `model` (str, default='gpt2'): The model id of a pretrained model hosted inside a model repo on huggingface.co. Valid model ids can be located at the root-level, like `bert-base-uncased`, or namespaced under a user or organization name, like `dbmdz/bert-base-german-cased`.
+- `model` [STR, DEFAULT='gpt2']:  *The model id of a pretrained model hosted inside a model repo on huggingface.co. Valid model ids can be located at the root-level, like `bert-base-uncased`, or namespaced under a user or organization name, like `dbmdz/bert-base-german-cased`.*
 
-- `tokenizer` (str, default='gpt2'): The model id of a predefined tokenizer hosted inside a model repo on huggingface.co. Valid model ids can be located at the root-level, like `bert-base-uncased`, or namespaced under a user or organization name, like `dbmdz/bert-base-german-cased`.
+- `tokenizer` [STR, DEFAULT='gpt2']: *The model id of a predefined tokenizer hosted inside a model repo on huggingface.co. Valid model ids can be located at the root-level, like "bert-base-uncased", or namespaced under a user or organization name, like "bmdz/bert-base-german-cased".*
 
-- `max_output_tokens` (int, default=100): The maximum numbers of tokens to generate, ignoring the number of tokens in the prompt.
+- `max_output_tokens` [INT, DEFAULT=100]: *The maximum numbers of tokens to generate, ignoring the number of tokens in the prompt.*
 
-- `gen_strat` (str, default='multinomial-sampling', choices=['greedy', 'contrastive-search', 'multinomial-sampling', 'beam-search','beam-search-multinomial', 'diverse-beam-search']): Specify output token sampling method.
+- `gen_strat` [str, DEFAULT='multinomial-sampling'], choices=['greedy', 'contrastive-search', 'multinomial-sampling', 'beam-search','beam-search-multinomial', 'diverse-beam-search']): *Specify output token sampling method.*
 
-- `num_beams` (int, default=1): Number of beams for beam search. 1 means no beam search.
+- `num_beams` [INT, DEFAULT=1]: *Number of beams for beam search. 1 means no beam search.*
 
-- `num_beam_groups` (int, default=1): Number of groups to divide `num_beams` into in order to ensure diversity among different groups of beams.
+- `num_beam_groups` [INT, DEFAULT=1]: *Number of groups to divide `num_beams` into in order to ensure diversity among different groups of beams.*
 
-- `penalty_alpha` (float, default=0): The values balance the model confidence and the degeneration penalty in contrastive search decoding.
+- `penalty_alpha` [FLOAT, DEFAULT=0]: *The values balance the model confidence and the degeneration penalty in contrastive search decoding.*
 
-Note that `num_beams` should be divisible by `num_beam_groups` for group beam search.
+#### *Note that `num_beams` should be divisible by `num_beam_groups` for group beam search.*
 
 
 ## Execution
