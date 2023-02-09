@@ -58,7 +58,7 @@ pip install -r requirements.txt
 To run the application, the following arguments can be passed as command line parameters:
 
 ```
-python main.py --model <model_id> --tokenizer <tokenizer_id> --max_output_tokens <int> --gen_strat <str> --num_beams <int> --num_beam_groups <int> --penalty_alpha <float>
+python main.py --model <model_name> --tokenizer <tokenizer_name> --max_output_tokens <int> --gen_strat <str> --num_beams <int> --num_beam_groups <int> --penalty_alpha <float>
 ```
 
 or simply, to run with default arguments:
