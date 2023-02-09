@@ -1,0 +1,396 @@
+<html>
+  <head>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+    <title>Transformer Visualization</title>
+
+
+    <style>
+    body{ background-color: #03001C;
+      }
+
+      .nine h1 {
+      margin-top: 35px;
+  text-align:center; font-size:50px; color:#FB2576; letter-spacing:3px;
+  font-family: 'Roboto Mono', monospace; font-weight:600;
+}
+.nine h1 span {
+  margin-top: 25px;
+    font-size:15px; color:#B6EADA; word-spacing:1px; font-weight:normal; letter-spacing:2px;
+    text-transform: uppercase; font-family:"Raleway", sans-serif; font-weight:500;
+
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-rows: 27px 0;
+    grid-gap: 20px;
+    align-items: center;
+}
+
+.nine h1 span:after,.nine h1 span:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    height: 5px;
+  background-color:#f8f8f8;
+}
+
+input {
+  background: #FCFFE7;
+}
+
+#form {
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.input-box.active-grey .input-1 {
+  border: 1px solid #dadce0;
+}
+.input-box.active-grey .input-label {
+  color: #80868b;
+  top: -8px;
+  background: #fff;
+  font-size: 11px;
+  transition: 250ms;
+}
+.input-box.active-grey .input-label svg {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  top: 2px;
+  transition: 250ms;
+}
+
+.input-box {
+  position: relative;
+  margin: 10px 0;
+}
+.input-box .input-label {
+  position: absolute;
+  color: #EB455F;
+  font-size: 21px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  max-width: calc(100% - (2 * 8px));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  left: 8px;
+  top: 16px;
+  padding: 0 8px;
+  transition: 250ms;
+  user-select: none;
+  pointer-events: none;
+}
+.input-box .input-label svg {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  top: 2px;
+  transition: 250ms;
+}
+.input-box .input-1 {
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+  border-radius: 4px;
+  color: #EB455F;
+  border: 1px solid #dadce0;
+  padding: 13px 15px;
+  transition: 250ms;
+}
+.input-box .input-1:focus {
+  outline: none;
+  border: 4px solid #BAD7E9;
+  transition: 250ms;
+}
+
+.input-box.error .input-label {
+  color: #f44336;
+  top: -8px;
+  background: #fff;
+  font-size: 11px;
+  transition: 250ms;
+}
+.input-box.error .input-1 {
+  border: 2px solid #f44336;
+}
+
+.input-box.focus .input-label,
+.input-box.active .input-label {
+  color: #BAD7E9s;
+  top: -8px;
+  border-radius: 4px;
+  background: #FCFFE7;
+  font-size: 11px;
+  transition: 250ms;
+}
+.input-box.focus .input-label svg,
+.input-box.active .input-label svg {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  top: 2px;
+  transition: 250ms;
+}
+
+.input-box.active .input-1 {
+  border: 4px solid #BAD7E9;
+}
+.pull-right {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+
+      #input_text {
+      border: 4px solid white;
+      font-size: 21px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      letter-spacing:2px;
+      box-shadow: 5px 5px #888888;
+      }
+
+      .output-box  {
+         width: 80vw;
+         min-height: 500px;
+         height: max-content;
+         padding: 20px;
+        font-size: 18px;
+        margin: 20px  auto;
+        background-color: #FCFFE7;
+        border-style: solid;
+        border-radius: 10px;
+        border: 2px solid white;
+        box-shadow: 10px 10px #888888;
+
+      }
+
+      .style_btn {
+    margin: 5px;
+    font-family: monospace;
+    font-size: x-large;
+    font-weight: bold;
+    border-color: black;
+    border-width: 2px;
+    box-shadow: 1px 1px black;
+    }
+
+      .hovertext {
+  position: relative;
+  border-bottom: 1px dotted black;
+  white-space: pre-line;
+
+}
+
+.hovertext::before {
+  content: attr(data-hover);
+  white-space: pre-line;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  width: 165px;
+  height: max-content;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  font-family: monospace;
+  font-size: large;
+
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+ z-index:1;
+  left: 50%;
+  top: 100%;
+}
+
+.style_btn:hover + .hovertext::before {
+  white-space: pre-line;
+  opacity : 1;
+  visibility: visible;
+}
+
+    .Generator_button{
+      margin-top: 25px;
+    }
+
+    #result {
+      color: green;
+    }
+
+    </style>
+  </head>
+  <body>
+
+
+<!--    <div class="container">-->
+<!--      <div class="heading">Transformer Visualization</div>-->
+        <div class="nine">
+  <h1>Transformer Distribution Visualizer<span>Research Toolkit</span></h1>
+</div>
+
+
+<!--        <form>-->
+<!--`-->
+<!--        <div class="input-output-container insert">-->
+<!--          <label>Input Text:</label>-->
+<!--          <input class="form-control" id="input_text">-->
+<!--          <button type="button" class="Generator_button btn btn-outline-success"  value="process" onclick="processText()">Generate</button>-->
+
+<!--        </div>-->
+<!--      </form>-->
+
+ <form id="form">
+  <div class="input-box">
+    <label class="input-label">Prompt</label>
+    <input type="text" class="input-1" id="input_text" onfocus="setFocus(true)" onblur="setFocus(false)" />
+      <div class="text-center">
+      <button type="button" class="Generator_button btn btn-outline-success btn-lg" style="scale:1.2" value="process" onclick="processText()">Generate</button>
+      </div>
+  </div>
+ </form>
+
+<!--      <div class="input-output-container">-->
+<!--        <div id="output_text" class="generated_text"></div>-->
+<!--      </div>-->
+    <div class="wrapper output-box">
+<!--    <div class="typing-demo">-->
+<!--      This is a typing demo.-->
+<!--    </div>-->
+    </div>
+
+<script>
+      function processText() {
+  var input_text = $("#input_text").val();
+
+  $.ajax({
+    url: "/process",
+    type: "POST",
+    data: { input_text: input_text },
+    success: function(response) {
+      // Split the response into words and scores
+      var obj = JSON.parse(response);
+      console.log(obj);
+
+      let scores = [];
+      let words = [];
+      let infos = [];
+      for (const key in obj) {
+      const group = obj[key];
+      let count =  Object.keys(group).length;
+
+      if(count == 1){
+
+            let word = Object.keys(group)
+            if (word[0] === " ")
+                word[0] = "&quot; &quot;";
+            words.push(word[0]);
+            scores.push(group[word]);
+            infos.push(" ");
+          }
+
+        else{
+
+            let word = Object.keys(group)
+            let score = group[word[word.length-1]];
+
+            words.push(word[word.length-1]);
+            scores.push(score);
+
+            if (word[word.length-1].search(/"/) > -1)
+                word[word.length-1] = word[word.length-1].replace(/"/g, "&quot;");
+            if (word[word.length-1].search(/'/) > -1)
+                word[word.length-1] = word[word.length-1].replace(/'/g, "&apos;");
+
+           let info_text = word[word.length-1] + " : " + (score*100).toFixed(2) + " %" + " \n";
+
+            for(let i = 0; i < word.length-1; i++){
+                let prob = (group[word[i]]*100).toFixed(2);
+
+                if (word[i].search(/"/) > -1)
+                    word[i] = word[i].replace(/"/g, "&quot;");
+                if (word[i].search(/'/) > -1)
+                    word[i] = word[i].replace(/'/g, "&apos;");
+
+                info_text = info_text + word[i] + " : " + prob + " %" + " \n" ;
+            }
+            infos.push(info_text)
+        }
+      }
+
+      // Create a container for each word
+      var word_containers = words.map(function(word, index) {
+      var score = scores[index];
+      var color = getColor(score);
+      var info = infos[index];
+
+      console.log(info);
+      return `<button type="button" class="btn btn-outline-primary style_btn" style="background-color:${color}">
+                ${word}</button>
+                <span class="hovertext" data-hover="${info}"></span>`;
+      });
+
+      // Join the containers and add them to the output text area
+      $(".wrapper").html(word_containers.join(" "));
+
+      $("#result").html("Processed Successfully!");
+    },
+    error: function(xhr, status, error) {
+      $("#result").html("Processing Failed!");
+    }
+  });
+}
+
+function getColor(score) {
+  // Map the score to a color
+  // You can use any color scale you like, for example
+  var color;
+  score = Math.floor(score*255);
+  if(score < 0){
+    color = "rgba(255,255,255,0)";
+  }
+  else{
+    color = `rgba(${255-score},${score},0,0.5)`;
+  }
+  return color;
+}
+
+    </script>
+
+<script>
+    function setFocus(on) {
+  var element = document.activeElement;
+  if (on) {
+    setTimeout(function () {
+      element.parentNode.classList.add("focus");
+    });
+  } else {
+    let box = document.querySelector(".input-box");
+    box.classList.remove("focus");
+    $("input").each(function () {
+      var $input = $(this);
+      var $parent = $input.closest(".input-box");
+      if ($input.val()) $parent.addClass("focus");
+      else $parent.removeClass("focus");
+    });
+  }
+}
+</script>
+
+  </body>
+</html>
